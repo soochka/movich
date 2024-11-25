@@ -249,24 +249,32 @@ margin-left: 15px;
     }
 
   
-
-    // פונקציה להוסיף קונפטי של גלידות
     function throwConfetti() {
-      for (let i = 0; i < 30; i++) {
-        const confetti = document.createElement('img');
-        confetti.src = 'https://order.mcdonalds.co.il/_next/image?url=https%3A%2F%2Fnewcdnmedia.mcdonalds.co.il%2F_media%2Fmedia%2F57%2F12249.png%3Ft%3D1717596756&w=1920&q=75';
-        confetti.classList.add('confetti');
-        
-        // Position each confetti randomly within the viewport
-        confetti.style.left = Math.random() * 100 + 'vw'; // Horizontal position (across the full width)
-        confetti.style.animationDelay = Math.random() * 2 + 's'; // Random delay before falling
-        
-        // Append the confetti element to the body
-        document.body.appendChild(confetti);
+  for (let i = 0; i < 50; i++) {
+    const confetti = document.createElement('img');
+    confetti.src = 'https://order.mcdonalds.co.il/_next/image?url=https%3A%2F%2Fnewcdnmedia.mcdonalds.co.il%2F_media%2Fmedia%2F57%2F12249.png%3Ft%3D1717596756&w=1920&q=75';
+    confetti.classList.add('confetti');
+    
+    // Position each confetti at the top of the screen
+    confetti.style.left = Math.random() * 100 + 'vw'; // Horizontal position (across the full width)
+    confetti.style.top = '0'; // Start from the top of the screen
+    
+    // Add some random movement to simulate fireworks
+    const xMovement = (Math.random() - 0.5) * 100; // Horizontal movement
+    const yMovement = Math.random() * 100 + 100; // Vertical fall distance
+    
+    confetti.style.transform = `translateX(${xMovement}vw) translateY(${yMovement}vh)`; // Apply the movement
 
-        // Remove the confetti element after its animation ends (2 seconds here)
-        setTimeout(() => confetti.remove(), 3000); // Match the duration of the animation
-      }
-    }
+    // Add random animation delay for variation
+    confetti.style.animationDelay = Math.random() * 2 + 's'; // Random delay before falling
+    
+    // Append the confetti element to the body
+    document.body.appendChild(confetti);
+
+    // Remove the confetti element after its animation ends (5 seconds)
+    setTimeout(() => confetti.remove(), 5000); // Adjusted to match the duration of the animation
+  }
+}
+
   </script>
 </body>
