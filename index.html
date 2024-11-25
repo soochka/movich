@@ -93,6 +93,11 @@
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
       animation: fadeIn 1s ease;
+      text-align: center; /* Center text horizontally */
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* Center text vertically */
+      align-items: center;
     }
 
     footer {
@@ -104,10 +109,10 @@
       position: fixed;
       bottom: 0;
       width: 100%;
-    
     }
+
     p{
-        margin-right: 50px;
+      margin-right: 50px;
     }
 
     /* עיצוב העיגול הקטן */
@@ -141,7 +146,7 @@
       position: absolute;
       width: 30px;
       height: 30px;
-      animation: fall 2s ease-out infinite;
+      animation: fall 3s ease-out infinite;
       z-index: 999;
     }
 
@@ -156,12 +161,12 @@
       }
     }
 
-  
-    .mcflurry{
-width:60px;
-height:60px;
-margin-left: 15px;
+    .mcflurry {
+      width: 60px;
+      height: 60px;
+      margin-left: 15px;
     }
+
   </style>
 </head>
 <body>
@@ -179,10 +184,8 @@ margin-left: 15px;
       <button onclick="setMood('לא עשיתי קקי חודשים')">לא עשיתי קקי חודשים</button>
     </div>
     <div class="result" id="result"></div>
-
-    
   </main>
- 
+
   <div class="floating-circle" onclick="throwConfetti()"><img src="https://order.mcdonalds.co.il/_next/image?url=https%3A%2F%2Fnewcdnmedia.mcdonalds.co.il%2F_media%2Fmedia%2F57%2F12249.png%3Ft%3D1717596756&w=1920&q=75" class="mcflurry"></div>
 
   <script>
@@ -217,33 +220,33 @@ margin-left: 15px;
       `;
     }
 
-  
+    // Function to trigger the confetti
     function throwConfetti() {
-  for (let i = 0; i < 50; i++) {
-    const confetti = document.createElement('img');
-    confetti.src = 'https://order.mcdonalds.co.il/_next/image?url=https%3A%2F%2Fnewcdnmedia.mcdonalds.co.il%2F_media%2Fmedia%2F57%2F12249.png%3Ft%3D1717596756&w=1920&q=75';
-    confetti.classList.add('confetti');
-    
-    // Position each confetti at the top of the screen
-    confetti.style.left = Math.random() * 100 + 'vw'; // Horizontal position (across the full width)
-    confetti.style.top = '0'; // Start from the top of the screen
-    
-    // Add some random movement to simulate fireworks
-    const xMovement = (Math.random() - 0.5) * 100; // Horizontal movement
-    const yMovement = Math.random() * 100 + 100; // Vertical fall distance
-    
-    confetti.style.transform = `translateX(${xMovement}vw) translateY(${yMovement}vh)`; // Apply the movement
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('img');
+        confetti.src = 'https://order.mcdonalds.co.il/_next/image?url=https%3A%2F%2Fnewcdnmedia.mcdonalds.co.il%2F_media%2Fmedia%2F57%2F12249.png%3Ft%3D1717596756&w=1920&q=75';
+        confetti.classList.add('confetti');
 
-    // Add random animation delay for variation
-    confetti.style.animationDelay = Math.random() * 2 + 's'; // Random delay before falling
-    
-    // Append the confetti element to the body
-    document.body.appendChild(confetti);
+        // Position each confetti at the top of the screen
+        confetti.style.left = Math.random() * 100 + 'vw'; // Horizontal position (across the full width)
+        confetti.style.top = '0'; // Start from the top of the screen
 
-    // Remove the confetti element after its animation ends (5 seconds)
-    setTimeout(() => confetti.remove(), 5000); // Adjusted to match the duration of the animation
-  }
-}
+        // Add random movement to simulate fireworks
+        const xMovement = (Math.random() - 0.5) * 100; // Horizontal movement
+        const yMovement = Math.random() * 100 + 100; // Vertical fall distance
 
+        confetti.style.transform = `translateX(${xMovement}vw) translateY(${yMovement}vh)`; // Apply the movement
+
+        // Add random animation delay for variation
+        confetti.style.animationDelay = Math.random() * 2 + 's'; // Random delay before falling
+
+        // Append the confetti element to the body
+        document.body.appendChild(confetti);
+
+        // Remove the confetti element after its animation ends (5 seconds)
+        setTimeout(() => confetti.remove(), 5000); // Adjusted to match the duration of the animation
+      }
+    }
   </script>
 </body>
+</html>
