@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>חמל מוביץ' 24/7</title>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* עיצוב כללי */
+    body {
+      font-family: 'Assistant', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+      background: url('https://www.idf.il/media/0f1nrpyf/%D7%90%D7%92%D7%93214-1.jpg?anchor=center&mode=crop&width=294&rnd=133746749890870000') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    header {
+      background: #268981;
+      color: white;
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      flex: 1;
+    }
+
+    header img {
+      width: 50px;
+      height: 50px;
+    }
+
+    main {
+      padding: 30px 20px;
+      background: rgba(0, 0, 0, 0.7);
+      margin: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      color: #ff3b3b;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 5px black;
+    }
+
+    .emotion-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .emotion-buttons button {
+      background: #ff3b3b;
+      border: none;
+      padding: 15px 25px;
+      font-size: 1.2rem;
+      font-family: 'Assistant';
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: white;
+      text-shadow: 1px 1px 3px black;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
+    }
+
+    .emotion-buttons button:hover {
+      background: #d32f2f;
+      transform: scale(1.1);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.9);
+    }
+
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      font-size: 1.5rem;
+      color: white;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+      animation: fadeIn 1s ease;
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 15px 0;
+      font-size: 0.9rem;
+      box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.7);
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    /* עיצוב העיגול הקטן */
+    .floating-circle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: #ff3b3b;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+      text-shadow: 1px 1px 3px black;
+      transition: transform 0.3s ease;
+    }
+
+    .floating-circle:hover {
+      transform: scale(1.2);
+      background: #d32f2f;
+    }
+
+    /* קונפטי */
+    .confetti {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      animation: fall 2s ease-out infinite;
+      z-index: 999;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* עיצוב טופס העלאת תמונות */
+    .upload-container {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .upload-container input {
+      font-size: 1rem;
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid #ff3b3b;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .upload-container input[type="file"]:hover {
+      background: #ff3b3b;
+      border-color: #d32f2f;
+    }
+
+    .uploaded-images {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .uploaded-images img {
+      max-width: 150px;
+      max-height: 150px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://www.idf.il/media/ldmbnsxp/picture2.png?anchor=center&mode=crop&height=71&rnd=133746749864600000" alt="לוגו">
+    <h1>חמל מוביץ' 24/7</h1>
+  </header>
+  <main>
+    <h2>מה התחושה היומית שלך?</h2>
+    <div class="emotion-buttons">
+      <button onclick="setMood('אל תשאלי')">אל תשאלי</button>
+      <button onclick="setMood('מתגעגעת')">מתגעגעת</button>
+      <button onclick="setMood('מתחילה קצת להנות')">מתחילה קצת להנות</button>
+      <button onclick="setMood('ישלי טש בואי נדבר')">ישלי טש בואי נדבר</button>
+      <button onclick="setMood('לא עשיתי קקי חודשים')">לא עשיתי קקי חודשים</button>
+    </div>
+    <div class="result" id="result"></div>
+
+    <!-- טופס העלאת תמונות -->
+    <div class="upload-container">
+      <input type="file" id="upload1" onchange="uploadImage(1)">
+      <input type="file" id="upload2" onchange="uploadImage(2)">
+    </div>
+
+    <div class="uploaded-images" id="uploaded-images"></div>
+
+  </main>
+  <footer>
+    <p>חמל מוביץ' - 24/7 ללא זכויות יוצרים</p>
+  </footer>
+  <div class="floating-circle" onclick="throwConfetti()">🍦</div>
+
+  <script>
+    // הפונקציה שמעדכנת את המצב רוח
+    function setMood(mood) {
+      const messages = {
+        'אל תשאלי': 'אני גמורה מהתחת ואין לי זמן לכלום, זה כמו טירונות בצבא, כמו כלא, ואני לא נהנת 😊',
+        'התגעגעתי': 'אני עצובה היום 😔. אשמח לדבר.',
+        'כעוסה': 'אני כעוסה היום 😠. צריכה לפרוק!',
+        'עצבנית': 'אני עצבנית היום 😤. בוא נדבר.',
+        'עייפה': 'אני עייפה מאוד 😴. רק רוצה לנוח.',
+      };
+
+      const resultDiv = document.getElementById('result');
+      const message = messages[mood];
+
+      resultDiv.innerHTML = `
+        <p>תחושה נבחרה: <strong>${mood}</strong></p>
+        <p>הודעה לוואטסאפ: <em>"${message}"</em></p>
+        <a href="https://api.whatsapp.com/send?phone=972547127990&text=${encodeURIComponent(message)}" 
+          target="_blank" style="
+          display: inline-block;
+          background: #25d366;
+          color: white;
+          padding: 10px 20px;
+          border-radius: 50px;
+          text-decoration: none;
+          font-weight: bold;
+          margin-top: 10px;">
+          שלח לוואטסאפ
+        </a>
+      `;
+    }
+
+    // פונקציה להעלאת תמונה
+    function uploadImage(number) {
+      const fileInput = document.getElementById(upload$,{number});
+      const file = fileInput.files[0];
+      
+      if (file) {
+        const imageURL = URL.createObjectURL(file);
+        const imageElement = document.createElement('img');
+        imageElement.src = imageURL;
+        document.getElementById('uploaded-images').appendChild(imageElement);
+        
+        // לאתחל את שדה הקובץ לאחר ההעלאה
+        fileInput.value = '';
+
+        // הסרת התמונה אחרי 24 שעות
+        setTimeout(() => {
+          imageElement.remove();
+        }, 24 * 60 * 60 * 1000); // 24 שעות
+      }
+    }
+
+    // פונקציה להוסיף קונפטי של גלידות
+    function throwConfetti() {
+      for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement('img');
+        confetti.src = 'https://order.mcdonalds.co.il/_next/image?url=https%3A%2F%2Fnewcdnmedia.mcdonalds.co.il%2F_media%2Fmedia%2F57%2F12249.png%3Ft%3D1717596756&w=1920&q=75';
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.animationDelay = Math.random() * 2 + 's';
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 2000);
+      }
+    }
+  </script>
+</body>
