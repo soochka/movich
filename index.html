@@ -84,7 +84,6 @@
       box-shadow: 0 6px 10px rgba(0, 0, 0, 0.9);
     }
 
-    /* CSS for centering the text inside the result container */
     .result {
       margin-top: 30px;
       padding: 20px;
@@ -94,11 +93,11 @@
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
       animation: fadeIn 1s ease;
+      text-align: center; /* Center text horizontally */
       display: flex;
       flex-direction: column;
-      justify-content: center;  /* Vertical centering */
-      align-items: center;      /* Horizontal centering */
-      text-align: center;       /* Ensure text is centered horizontally */
+      justify-content: center; /* Center text vertically */
+      align-items: center;
     }
 
     footer {
@@ -112,7 +111,7 @@
       width: 100%;
     }
 
-    p {
+    p{
       margin-right: 50px;
     }
 
@@ -142,6 +141,32 @@
       background: #d32f2f;
     }
 
+    /* קונפטי */
+    .confetti {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      animation: fall 3s ease-out infinite;
+      z-index: 999;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .mcflurry {
+      width: 60px;
+      height: 60px;
+      margin-left: 15px;
+    }
+
   </style>
 </head>
 <body>
@@ -160,6 +185,7 @@
     </div>
     <div class="result" id="result"></div>
   </main>
+
   <div class="floating-circle" onclick="throwConfetti()"><img src="https://order.mcdonalds.co.il/_next/image?url=https%3A%2F%2Fnewcdnmedia.mcdonalds.co.il%2F_media%2Fmedia%2F57%2F12249.png%3Ft%3D1717596756&w=1920&q=75" class="mcflurry"></div>
 
   <script>
@@ -180,10 +206,46 @@
         <p>תחושה נבחרה: <strong>${mood}</strong></p>
         <p>הודעה לוואטסאפ: <em>"${message}"</em></p>
         <a href="https://api.whatsapp.com/send?phone=972547127990&text=${encodeURIComponent(message)}" 
-          target="_blank" style="display: inline-block; background: #25d366; color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; margin-top: 10px;">
+          target="_blank" style="
+          display: inline-block;
+          background: #25d366;
+          color: white;
+          padding: 10px 20px;
+          border-radius: 50px;
+          text-decoration: none;
+          font-weight: bold;
+          margin-top: 10px;">
           שלח לוואטסאפ
         </a>
       `;
+    }
+
+    // Function to trigger the confetti
+    function throwConfetti() {
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('img');
+        confetti.src = 'https://order.mcdonalds.co.il/_next/image?url=https%3A%2F%2Fnewcdnmedia.mcdonalds.co.il%2F_media%2Fmedia%2F57%2F12249.png%3Ft%3D1717596756&w=1920&q=75';
+        confetti.classList.add('confetti');
+
+        // Position each confetti at the top of the screen
+        confetti.style.left = Math.random() * 100 + 'vw'; // Horizontal position (across the full width)
+        confetti.style.top = '0'; // Start from the top of the screen
+
+        // Add random movement to simulate fireworks
+        const xMovement = (Math.random() - 0.5) * 100; // Horizontal movement
+        const yMovement = Math.random() * 100 + 100; // Vertical fall distance
+
+        confetti.style.transform = `translateX(${xMovement}vw) translateY(${yMovement}vh)`; // Apply the movement
+
+        // Add random animation delay for variation
+        confetti.style.animationDelay = Math.random() * 2 + 's'; // Random delay before falling
+
+        // Append the confetti element to the body
+        document.body.appendChild(confetti);
+
+        // Remove the confetti element after its animation ends (5 seconds)
+        setTimeout(() => confetti.remove(), 5000); // Adjusted to match the duration of the animation
+      }
     }
   </script>
 </body>
